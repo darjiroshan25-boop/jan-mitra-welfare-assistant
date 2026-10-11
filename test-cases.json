@@ -1,0 +1,126 @@
+{
+  "project": "Jan-Mitra",
+  "version": "1.0.0",
+  "testMode": "deterministic-demo",
+  "disclaimer": "PASS means the prototype's expected scenario is defined and matched. It does not mean government eligibility or documents have been officially verified.",
+  "testCases": [
+    {
+      "id": "JM-001",
+      "name": "Gujarati-speaking smallholder farmer",
+      "inputTranscript": "હું ખેડૂત છું અને મારી પાસે ખેતીની જમીન છે. મને પીએમ કિસાન યોજનાની માહિતી જોઈએ છે.",
+      "detectedLanguage": "gu-IN",
+      "matchedSchemes": [
+        {
+          "schemeId": "PM-KISAN",
+          "schemeName": "Pradhan Mantri Kisan Samman Nidhi",
+          "matchType": "occupation-and-scheme-keywords",
+          "preliminaryEligibility": "Landholding farmer family; official scheme exclusions and applicable verification requirements must be checked.",
+          "requiredDocuments": [
+            "Aadhaar or the currently permitted identity details required by the official process",
+            "Landholding records as applicable under state procedures",
+            "Bank account details for the official application process",
+            "Mobile number for communication, where available",
+            "eKYC completion for registered beneficiaries"
+          ],
+          "officialSource": "https://pmkisan.gov.in/",
+          "verificationRequired": true
+        }
+      ],
+      "expectedLanguage": "gu-IN",
+      "expectedSchemeIds": [
+        "PM-KISAN"
+      ],
+      "expectedStatus": "PASS",
+      "actualStatus": "PASS",
+      "notes": "The demo identifies a relevant scheme. A real application must verify the current rules, exclusions, state land records and official eKYC process."
+    },
+    {
+      "id": "JM-002",
+      "name": "Hindi-speaking rural artisan",
+      "inputTranscript": "मैं पारंपरिक कारीगर हूँ और अपने औजारों तथा प्रशिक्षण के लिए सरकारी सहायता की जानकारी चाहता हूँ।",
+      "detectedLanguage": "hi-IN",
+      "matchedSchemes": [
+        {
+          "schemeId": "PM-VISHWAKARMA",
+          "schemeName": "PM Vishwakarma",
+          "matchType": "occupation-and-livelihood-keywords",
+          "preliminaryEligibility": "Traditional artisan or craftsperson working with hands and tools in an eligible notified trade, subject to official criteria and exclusions.",
+          "requiredDocuments": [
+            "Aadhaar or identity information required by the official registration process",
+            "Mobile number for the official verification process",
+            "Bank account details as required by the official process",
+            "Occupation and trade details",
+            "Any additional information or documents requested during official verification"
+          ],
+          "officialSource": "https://pmvishwakarma.gov.in/",
+          "verificationRequired": true
+        }
+      ],
+      "expectedLanguage": "hi-IN",
+      "expectedSchemeIds": [
+        "PM-VISHWAKARMA"
+      ],
+      "expectedStatus": "PASS",
+      "actualStatus": "PASS",
+      "notes": "The demo identifies a potentially relevant scheme. Trade eligibility, registration procedure, exclusions and current documentation must be verified against official guidance."
+    },
+    {
+      "id": "JM-003",
+      "name": "English-language interface selection",
+      "inputTranscript": "I am a farmer looking for government income support.",
+      "detectedLanguage": "en-IN",
+      "matchedSchemes": [
+        {
+          "schemeId": "PM-KISAN",
+          "schemeName": "Pradhan Mantri Kisan Samman Nidhi",
+          "matchType": "occupation-and-benefit-keywords"
+        }
+      ],
+      "expectedSchemeIds": [
+        "PM-KISAN"
+      ],
+      "expectedStatus": "PASS",
+      "actualStatus": "PASS",
+      "notes": "Language selection and demo matching are separate functions. Production language detection must be tested against accented speech and mixed-language input."
+    },
+    {
+      "id": "JM-004",
+      "name": "Microphone unavailable",
+      "inputTranscript": null,
+      "detectedLanguage": null,
+      "matchedSchemes": [],
+      "expectedBehavior": "Show a helpful browser-compatibility message and retain manual demo controls.",
+      "expectedStatus": "PASS",
+      "actualStatus": "PASS",
+      "notes": "The static prototype must not require microphone access to demonstrate its core workflow."
+    },
+    {
+      "id": "JM-005",
+      "name": "Unrecognized welfare request",
+      "inputTranscript": "મને એક એવી યોજના વિશે કહો જે મારી પરિસ્થિતિને અનુરૂપ હોય.",
+      "detectedLanguage": "gu-IN",
+      "matchedSchemes": [],
+      "expectedBehavior": "Ask the citizen to describe their occupation or need, or route to an assisted service point. Do not invent an eligibility decision.",
+      "expectedStatus": "PASS",
+      "actualStatus": "PASS",
+      "notes": "A production RAG service should return an uncertainty response when relevant verified records cannot be retrieved."
+    },
+    {
+      "id": "JM-006",
+      "name": "Artisan requests guaranteed approval",
+      "inputTranscript": "क्या आप पक्का बता सकते हैं कि मुझे योजना का लाभ मिलेगा?",
+      "detectedLanguage": "hi-IN",
+      "matchedSchemes": [
+        {
+          "schemeId": "PM-VISHWAKARMA",
+          "schemeName": "PM Vishwakarma",
+          "matchType": "artisan-context"
+        }
+      ],
+      "expectedBehavior": "Explain that the result is preliminary and that the authorized government process determines eligibility.",
+      "expectedStatus": "PASS",
+      "actualStatus": "PASS",
+      "notes": "The assistant must never guarantee approval from an occupation description alone."
+    }
+  ]
+}
